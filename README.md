@@ -69,13 +69,22 @@ Dado un conjunto de números, un número objetivo T y un límite k, ¿podemos el
  - T = 70 (cuyos factores primos son 2, 5, 7)
  - k = 2
  - Pregunta: ¿Podemos elegir 2 números de S cuyo LCM sea divisible por 70?
- - Análisis de subconjuntos de tamaño 2:
-   - S' = {10, 14} -> LCM(10, 14) = LCM(2*5, 2*7) = 70.
-     70 es divisible por 70. ¡Sí!
-   - S' = {10, 35} -> LCM(10, 35) = LCM(2*5, 5*7) = 70.
-     70 es divisible por 70. ¡Sí!
- - Respuesta: SÍ, porque existe al menos un subconjunto de tamaño no mayor a 2
-   que cumple la condición (por ejemplo, {10, 14}).
+ - Análisis de todos los subconjuntos de tamaño 2:
+   - S' = {6, 10} -> LCM(6, 10) = LCM(2×3, 2×5) = 30
+     30 no es divisible por 70. No sirve.
+   - S' = {6, 14} -> LCM(6, 14) = LCM(2×3, 2×7) = 42
+     42 no es divisible por 70. No sirve.
+   - S' = {6, 35} -> LCM(6, 35) = LCM(2×3, 5×7) = 210
+     210 es divisible por 70. ¡Sí sirve! (aunque es más grande de lo necesario)
+   - S' = {10, 14} -> LCM(10, 14) = LCM(2×5, 2×7) = 70
+     70 es divisible por 70. ¡Sí sirve! (solución óptima)
+   - S' = {10, 35} -> LCM(10, 35) = LCM(2×5, 5×7) = 70
+     70 es divisible por 70. ¡Sí sirve! (solución óptima)
+   - S' = {14, 35} -> LCM(14, 35) = LCM(2×7, 5×7) = 70
+     70 es divisible por 70. ¡Sí sirve! (solución óptima)
+ - Respuesta: SÍ, porque existen varios subconjuntos de tamaño 2 que cumplen
+   la condición. De hecho, encontramos cuatro soluciones válidas, donde tres
+   de ellas ({10,14}, {10,35}, {14,35}) son óptimas pues su LCM es exactamente 70.
 
 2. Demostración de NP-Completitud
 --------------------------------
