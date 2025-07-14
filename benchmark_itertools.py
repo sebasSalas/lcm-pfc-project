@@ -5,6 +5,7 @@ import random
 import tracemalloc
 import multiprocessing
 import queue
+from graficador import generar_graficas
 
 # --- Funciones de Lógica del Problema ---
 
@@ -25,10 +26,6 @@ def lcm_list(numbers):
     return result
 
 def solve_lcm_pfc_itertools(S, T, k, verbose=True):
-    """
-    Resuelve el problema usando itertools.combinations.
-    Retorna: (encontrado, subconjunto, combinaciones_probadas)
-    """
     combinations_checked = 0
     for s_prime in combinations(S, k):
         combinations_checked += 1
@@ -47,13 +44,10 @@ TEST_SCENARIOS = [
     {"name": "Medio-Alto", "n": 20, "k": 10, "max_val": 1000},
     {"name": "Alto 1", "n": 22, "k": 11, "max_val": 5000},
     {"name": "Alto 2", "n": 25, "k": 12, "max_val": 5000},
-    {"name": "Muy Alto", "n": 28, "k": 14, "max_val": 10000}, # <-- Probablemente excederá el tiempo
+    {"name": "Muy Alto", "n": 28, "k": 14, "max_val": 10000},
 ]
 
 def solver_wrapper(solver_function, q, S, T, k):
-    """
-    Wrapper para ejecutar el solver y capturar la memoria en un proceso separado.
-    """
     tracemalloc.start()
     found, subset, combinations_checked = solver_function(S, T, k, verbose=False)
     peak = tracemalloc.get_traced_memory()[1]
@@ -66,40 +60,55 @@ def run_performance_tests(solver_function, script_name):
     print(header)
     print("-" * len(header))
 
+    tiempos = []
+    memoria_kb = []
+    combinaciones = []
+    n_valores = []
+    k_valores = []
+    nombres_escenarios = []
+
     for scenario in TEST_SCENARIOS:
         n, k, max_val = scenario["n"], scenario["k"], scenario["max_val"]
         S = set(random.sample(range(2, max_val), n))
         T = 9999999999
+        nombre = scenario["name"]
 
         q = multiprocessing.Queue()
         p = multiprocessing.Process(target=solver_wrapper, args=(solver_function, q, S, T, k))
-        
+
         start_time = time.perf_counter()
         p.start()
-        p.join(timeout=180) # <--- LÍMITE DE TIEMPO
+        p.join(timeout=180)
         end_time = time.perf_counter()
 
         if p.is_alive():
-            # El proceso excedió el tiempo límite
             p.terminate()
             p.join()
-            print(f"{scenario['name']:<15} | {n:>3} | {k:>3} | {'N/A':>18} | {'>180.0':>12} | {'N/A':>15} | {'TIMED OUT':>12}")
+            print(f"{nombre:<15} | {n:>3} | {k:>3} | {'N/A':>18} | {'>180.0':>12} | {'N/A':>15} | {'TIMED OUT':>12}")
             continue
 
         try:
-            # Obtener resultados del proceso hijo
             found, combinations_checked, peak = q.get_nowait()
             time_taken = end_time - start_time
             peak_kb = peak / 1024
             print(
-                f"{scenario['name']:<15} | {n:>3} | {k:>3} | {combinations_checked:>18,} | "
+                f"{nombre:<15} | {n:>3} | {k:>3} | {combinations_checked:>18,} | "
                 f"{time_taken:>12.4f} | {peak_kb:>15.2f} | {str(found):>12}"
             )
+            tiempos.append(time_taken)
+            memoria_kb.append(peak_kb)
+            combinaciones.append(combinations_checked)
+            n_valores.append(n)
+            k_valores.append(k)
+            nombres_escenarios.append(nombre)
         except queue.Empty:
             time_taken = end_time - start_time
-            print(f"{scenario['name']:<15} | {n:>3} | {k:>3} | {'N/A':>18} | {time_taken:>12.4f} | {'N/A':>15} | {'ERROR':>12}")
+            print(f"{nombre:<15} | {n:>3} | {k:>3} | {'N/A':>18} | {time_taken:>12.4f} | {'N/A':>15} | {'ERROR':>12}")
+
+    # Generar gráficas
+    generar_graficas(combinaciones, tiempos, memoria_kb, n_valores, k_valores, nombres_escenarios)
+    print("\n✅ Gráficas generadas en la carpeta 'graficas/'")
 
 if __name__ == "__main__":
-    # Necesario para que multiprocessing funcione correctamente en algunos S.O.
     multiprocessing.freeze_support()
-    run_performance_tests(solve_lcm_pfc_itertools, "benchmark_itertools.py") 
+    run_performance_tests(solve_lcm_pfc_itertools, "benchmark_itertools.py")
