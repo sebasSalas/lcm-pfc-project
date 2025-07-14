@@ -1,17 +1,42 @@
 # # El siguiente código implementa una solución de fuerza bruta para el problema
-# # LCM Prime Factor Covering. Dado que el problema es NP-completo, esta
-# # solución explora todas las combinaciones posibles de subconjuntos de tamaño
-# # hasta k, lo cual es solo factible para entradas pequeñas.
+# # LCM Prime Factor Covering. A diferencia de la versión original, esta
+# # implementación NO UTILIZA `itertools.combinations`. En su lugar, genera
+# # y almacena todas las combinaciones de subconjuntos en memoria, lo que
+# # demuestra la ineficiencia espacial de este enfoque.
 
 import math
-from itertools import combinations
-# NOTA: Se utiliza `itertools.combinations` por ser un generador. Este método es crucial para la eficiencia de memoria,
-        # generador. Este método es crucial para la eficiencia de memoria,
-        # ya que crea las combinaciones una por una bajo demanda en lugar
-        # de almacenarlas todas a la vez. Esto mantiene la complejidad
-        # espacial en O(k). Una implementación que guarde todas las
-        # combinaciones en una lista tendría una complejidad espacial de
-        # O(C(n, k) * k), lo cual sería inviable.
+# Se elimina la importación de `itertools.combinations`
+
+# NOTA DE DISEÑO:
+# En esta versión, hemos reemplazado el generador `itertools.combinations`
+# por una función `find_combinations` que retorna una lista completa con
+# todos los subconjuntos. Esto tiene una implicación directa y negativa
+# en la complejidad espacial. Mientras que la versión con `itertools`
+# tenía una complejidad espacial de O(k), esta versión tiene una
+# complejidad de O(C(n, k) * k), donde C(n, k) es el coeficiente
+# binomial. Para entradas grandes, esto agotaría rápidamente la memoria
+# del sistema.
+
+def get_combinations(s, k):
+    """
+    Genera todas las combinaciones de tamaño k del conjunto s.
+    Esta función es ineficiente en memoria ya que retorna una lista completa.
+    """
+    if k == 0:
+        return [[]]
+    if not s or k < 0:
+        return []
+
+    s_list = list(s)
+    first = s_list[0]
+    rest = s_list[1:]
+    
+    # Combinaciones que incluyen el primer elemento + combinaciones que no lo incluyen.
+    combs_with_first = [[first] + c for c in get_combinations(rest, k - 1)]
+    combs_without_first = get_combinations(rest, k)
+    
+    return combs_with_first + combs_without_first
+
 def gcd(a, b):
     """Calcula el Máximo Común Divisor de a y b."""
     return math.gcd(a, b)
@@ -38,13 +63,13 @@ def lcm_list(numbers):
 
 def solve_lcm_pfc(S, T, k):
     """
-    Resuelve el problema LCM Prime Factor Covering buscando un subconjunto
-    de tamaño EXACTO k.
+    Resuelve el problema LCM Prime Factor Covering mediante fuerza bruta
+    buscando un subconjunto de tamaño EXACTO k.
 
     Args:
         S (list or set): El conjunto de enteros positivos.
         T (int): El entero objetivo.
-        k (int): El tamaño exacto del subconjunto.
+        k (int): El tamaño máximo del subconjunto.
 
     Returns:
         tuple: Una tupla (bool, list) donde el bool es True si se encontró
@@ -53,9 +78,15 @@ def solve_lcm_pfc(S, T, k):
     """
     print(f"Buscando un subconjunto S' ⊆ {S} de tamaño EXACTO {k} tal que {T} | LCM(S')...\n")
     
-    # ¡CAMBIO CLAVE! El bucle que iteraba sobre los tamaños de 1 a k ha sido eliminado.
-    # Ahora solo se buscan combinaciones del tamaño exacto especificado por k.
-    for s_prime in combinations(S, k):
+    # ¡CAMBIO CLAVE!
+    # El bucle que iteraba sobre los tamaños de 1 a k ha sido eliminado.
+    # Ahora la función solo busca combinaciones del tamaño exacto especificado por k.
+    
+    # Generamos y almacenamos TODAS las combinaciones de tamaño 'k' en una lista.
+    all_combinations = get_combinations(list(S), k)
+    print(f"Generadas {len(all_combinations)} combinaciones de tamaño {k} para S'.")
+
+    for s_prime in all_combinations:
         # Calcular el LCM del subconjunto actual
         current_lcm = lcm_list(list(s_prime))
         
