@@ -53,8 +53,7 @@ def solve_lcm_pfc(S, T, k):
     """
     print(f"Buscando un subconjunto S' ⊆ {S} de tamaño EXACTO {k} tal que {T} | LCM(S')...\n")
     
-    # ¡CAMBIO CLAVE! El bucle que iteraba sobre los tamaños de 1 a k ha sido eliminado.
-    # Ahora solo se buscan combinaciones del tamaño exacto especificado por k.
+    # Buscan combinaciones del tamaño exacto especificado por k.
     for s_prime in combinations(S, k):
         # Calcular el LCM del subconjunto actual
         current_lcm = lcm_list(list(s_prime))
