@@ -6,7 +6,7 @@
 
 ## 1. Fundamentos Matemáticos: Mínimo Común Múltiplo (MCM/LCM)
 
-El Mínimo Común Múltiplo (MCM) es un concepto matemático fundamental que nos ayuda a encontrar el número más pequeño que es múltiplo de dos o más números. Por ejemplo, el MCM de 4 y 6 es 12, ya que es el número más pequeño que es divisible tanto por 4 como por 6.
+El Mínimo Común Múltiplo (MCM) es un concepto matemático fundamental que nos ayuda a encontrar el número más pequeño que es múltiplo de dos o más números. Por ejemplo, el MCM de 6 y 10 es 30, ya que es el número más pequeño que es divisible tanto por 6 como por 10.
 
 ### 1.1. Métodos para Calcular el MCM
 
@@ -15,32 +15,31 @@ El Mínimo Común Múltiplo (MCM) es un concepto matemático fundamental que nos
 - Tomar cada factor primo el mayor número de veces que aparezca
 - Multiplicar todos estos factores
 
-**Ejemplo:** MCM(12, 18)
-- 12 = 2² × 3
-- 18 = 2 × 3²
-- MCM = 2² × 3² = 36
+**Ejemplo:** MCM(6, 10)
+- 6 = 2 × 3
+- 10 = 2 × 5
+- MCM = 2 × 3 × 5 = 30
 
 #### B. Método por División
 - Dividir los números por sus factores primos comunes
 - Continuar hasta que no haya más divisores comunes
 - Multiplicar todos los divisores y los números restantes
 
-**Ejemplo:** MCM(15, 20)
+**Ejemplo:** MCM(10, 14)
 ```
-15, 20 | 5
- 3,  4 | 2
- 3,  2 | 2
- 3,  1 | 3
+10, 14 | 2
+ 5,  7 | 5
+ 1,  7 | 7
  1,  1
-MCM = 5 × 2 × 2 × 3 = 60
+MCM = 2 × 5 × 7 = 70
 ```
 
 #### C. Método usando el MCD (Máximo Común Divisor)
 - Usar la fórmula: MCM(a,b) = (a × b) ÷ MCD(a,b)
 
-**Ejemplo:** MCM(8, 12)
-- MCD(8,12) = 4
-- MCM = (8 × 12) ÷ 4 = 96 ÷ 4 = 24
+**Ejemplo:** MCM(14, 35)
+- MCD(14, 35) = 7
+- MCM = (14 × 35) ÷ 7 = 70
 
 ### 1.2. Propiedades Importantes del MCM
 
