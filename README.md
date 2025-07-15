@@ -4,54 +4,54 @@
 
 ---
 
-## 1. Fundamentos Matemáticos: Mínimo Común Múltiplo (MCM/LCM)
+## 1. Fundamentos Matemáticos: Least Common Multiple (LCM)
 
-El Mínimo Común Múltiplo (MCM) es un concepto matemático fundamental que nos ayuda a encontrar el número más pequeño que es múltiplo de dos o más números. Por ejemplo, el MCM de 6 y 10 es 30, ya que es el número más pequeño que es divisible tanto por 6 como por 10.
+El Least Common Multiple (LCM, en español Mínimo Común Múltiplo o MCM) es un concepto matemático fundamental que nos ayuda a encontrar el número más pequeño que es múltiplo de dos o más números. Por ejemplo, el LCM de 6 y 10 es 30, ya que es el número más pequeño que es divisible tanto por 6 como por 10.
 
-### 1.1. Métodos para Calcular el MCM
+### 1.1. Métodos para Calcular el LCM
 
 #### A. Método por Descomposición en Factores Primos
 - Descomponer cada número en sus factores primos
 - Tomar cada factor primo el mayor número de veces que aparezca
 - Multiplicar todos estos factores
 
-**Ejemplo:** MCM(6, 10)
+**Ejemplo:** LCM(6, 10)
 - 6 = 2 × 3
 - 10 = 2 × 5
-- MCM = 2 × 3 × 5 = 30
+- LCM = 2 × 3 × 5 = 30
 
 #### B. Método por División
 - Dividir los números por sus factores primos comunes
 - Continuar hasta que no haya más divisores comunes
 - Multiplicar todos los divisores y los números restantes
 
-**Ejemplo:** MCM(10, 14)
+**Ejemplo:** LCM(10, 14)
 ```
 10, 14 | 2
  5,  7 | 5
  1,  7 | 7
  1,  1
-MCM = 2 × 5 × 7 = 70
+LCM = 2 × 5 × 7 = 70
 ```
 
-#### C. Método usando el MCD (Máximo Común Divisor)
-- Usar la fórmula: MCM(a,b) = (a × b) ÷ MCD(a,b)
+#### C. Método usando el GCD (Greatest Common Divisor)
+- Usar la fórmula: LCM(a,b) = (a × b) ÷ GCD(a,b)
 
-**Ejemplo:** MCM(14, 35)
-- MCD(14, 35) = 7
-- MCM = (14 × 35) ÷ 7 = 70
+**Ejemplo:** LCM(14, 35)
+- GCD(14, 35) = 7
+- LCM = (14 × 35) ÷ 7 = 70
 
-### 1.2. Propiedades Importantes del MCM
+### 1.2. Propiedades Importantes del LCM
 
-- El MCM de dos números siempre es mayor o igual que ambos números
-- El MCM de dos números primos entre sí es su producto
-- El MCM es asociativo: MCM(a,b,c) = MCM(MCM(a,b),c)
-- Para cualquier número a: MCM(a,a) = a
-- El MCM está relacionado con el MCD por la fórmula: a × b = MCD(a,b) × MCM(a,b)
+- El LCM de dos números siempre es mayor o igual que ambos números
+- El LCM de dos números primos entre sí es su producto
+- El LCM es asociativo: LCM(a,b,c) = LCM(LCM(a,b),c)
+- Para cualquier número a: LCM(a,a) = a
+- El LCM está relacionado con el GCD por la fórmula: a × b = GCD(a,b) × LCM(a,b)
 
 ### 1.3. En el Contexto de este Problema
 
-El MCM juega un papel crucial en nuestro problema de cobertura de factores primos, ya que necesitamos encontrar un subconjunto de números cuyo MCM sea divisible por un número objetivo T. Esto implica que todos los factores primos de T deben estar presentes (con al menos la misma multiplicidad) en el MCM del subconjunto seleccionado.
+El LCM juega un papel crucial en nuestro problema de cobertura de factores primos, ya que necesitamos encontrar un subconjunto de números cuyo LCM sea divisible por un número objetivo T. Esto implica que todos los factores primos de T deben estar presentes (con al menos la misma multiplicidad) en el LCM del subconjunto seleccionado.
 
 ---
 
@@ -59,7 +59,7 @@ El MCM juega un papel crucial en nuestro problema de cobertura de factores primo
 
 ### 2.1. Descripción Informal
 
-Dado un conjunto de números, un número objetivo T y un límite k, ¿podemos elegir como máximo k números del conjunto de tal manera que su Mínimo Común Múltiplo (LCM) sea divisible por T? En esencia, se busca "cubrir" todos los factores primos de T usando los factores de un pequeño subconjunto de números.
+Dado un conjunto de números, un número objetivo T y un límite k, ¿podemos elegir como máximo k números del conjunto de tal manera que su Least Common Multiple (LCM) sea divisible por T? En esencia, se busca "cubrir" todos los factores primos de T usando los factores de un pequeño subconjunto de números.
 
 ### 2.2. Formulación Formal
 
@@ -180,8 +180,8 @@ Dada una instancia de SET COVER (U, C, k), construimos una instancia de LCM-PFC 
 
 **Desglose detallado de la complejidad:**
 - **O(n^k):** Corresponde al número de subconjuntos posibles de tamaño k que se pueden formar a partir de n elementos. Este término domina el crecimiento de la complejidad, ya que el número de combinaciones crece exponencialmente con k.
-- **k:** Para cada subconjunto, es necesario calcular el MCM de k números. Esto implica realizar k-1 operaciones de MCM (cada una usando el MCD), por lo que el costo de procesar cada subconjunto es proporcional a k.
-- **log(L):** Cada operación de MCM/MCD tiene un costo logarítmico respecto al tamaño de los números involucrados, donde L es el valor máximo que puede alcanzar el MCM.
+- **k:** Para cada subconjunto, es necesario calcular el LCM de k números. Esto implica realizar k-1 operaciones de LCM (cada una usando el GCD), por lo que el costo de procesar cada subconjunto es proporcional a k.
+- **log(L):** Cada operación de LCM/GCD tiene un costo logarítmico respecto al tamaño de los números involucrados, donde L es el valor máximo que puede alcanzar el LCM.
 
 **Fórmula completa:**
 - El tiempo total es aproximadamente:  
@@ -189,14 +189,14 @@ Dada una instancia de SET COVER (U, C, k), construimos una instancia de LCM-PFC 
 
 **¿Se puede simplificar?**
 - En muchos textos y contextos, cuando se busca dar una idea general del crecimiento y no se requiere precisión absoluta, se puede omitir el factor k y escribir la complejidad como **O(n^k * log(L))**. Esto es válido porque, para valores grandes de n y k, el término n^k domina completamente sobre k.
-- **Sin embargo**, para un análisis riguroso y comparativo, es preferible mantener la versión detallada **O(n^k * k * log(L))**, ya que muestra explícitamente el costo de calcular el MCM de cada subconjunto.
+- **Sin embargo**, para un análisis riguroso y comparativo, es preferible mantener la versión detallada **O(n^k * k * log(L))**, ya que muestra explícitamente el costo de calcular el LCM de cada subconjunto.
 
 > **Resumen:**
 > - Usa la versión detallada O(n^k * k * log(L)) para documentación técnica y análisis profundo.
 > - Puedes mencionar la versión simplificada O(n^k * log(L)) en contextos donde solo importa el crecimiento exponencial y no los factores internos.
 
 **Ejemplo práctico:**
-- Si n = 10 y k = 3, hay 120 subconjuntos posibles (C(10,3)), y para cada uno se hacen 2 operaciones de MCM, cada una con costo logarítmico.
+- Si n = 10 y k = 3, hay 120 subconjuntos posibles (C(10,3)), y para cada uno se hacen 2 operaciones de LCM, cada una con costo logarítmico.
 - Si n o k aumentan, el número de subconjuntos crece mucho más rápido que el factor k, pero este último sigue siendo relevante para el costo total.
 
 ### 4.2. Complejidad Espacial: O(k + log(L))
