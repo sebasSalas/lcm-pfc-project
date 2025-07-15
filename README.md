@@ -208,22 +208,6 @@ Dada una instancia de SET COVER (U, C, k), construimos una instancia de LCM-PFC 
 - **Título:** Tiempo de Ejecución Real
 - **Descripción:** Gráfica de tiempos de ejecución reales para diferentes tamaños de entrada, comparando con la curva teórica.
 
-Escenario       |   n |   k |      Combinaciones |   Tiempo (s) |    Memoria (MB)
---------------------------------------------------------------------------------
-Caso Base       |  10 |   5 |                252 |       0.0040 |           12.61
-Medio 1         |  15 |   5 |               3003 |       0.0008 |            0.01
-Medio 2         |  15 |   7 |               6435 |       0.0017 |            0.10
-Medio 3         |  20 |   5 |              15504 |       0.0008 |            0.00
-Medio-Alto      |  20 |  10 |             184756 |       0.0129 |           13.36
-Alto 1          |  22 |  11 |             705432 |       0.0515 |           48.15
-Alto 2          |  25 |  12 |            5200300 |       0.3812 |          414.54
-Muy Alto        |  28 |  14 |           40116600 |       3.2527 |         3799.56
-Extremo         |  32 |  16 |                N/A |        ERROR |             N/A
-Error en Extremo: Requested 601080390x16 (71.7GB) array exceeds maximum array size preference (14.9GB). This might cause MATLAB to become unresponsive.
-ADVERTENCIA: Este script intentará generar y almacenar en memoria:
-  - Número de combinaciones: 601080390
-  - Tamaño de la matriz: 601080390 x 16
-  - Memoria estimada requerida: 71.65 GB
 
 ## 5. Conclusiones
 
