@@ -212,8 +212,15 @@ Dada una instancia de SET COVER (U, C, k), construimos una instancia de LCM-PFC 
 - **Título:** Tiempo de Ejecución Real
 - **Descripción:** Gráfica de tiempos de ejecución reales para diferentes tamaños de entrada, comparando con la curva teórica.
 
+![Gráfica 3: Tiempo de Ejecución Real](images/tiempos_reales_ejes_invertidos.png)
+
+**[RESULTADOS MATLAB]**
+- **Título:** Resultados Matlab
+- **Descripción:** Captura de pantalla de los resultados obtenidos en Matlab para el problema LCM-PFC.
+
+![Resultados Matlab](images/Captura.PNG)
+
 ---
-![Gráfica 1: Complejidad Temporal](images/captura.png)
 
 ## 5. Conclusiones
 
