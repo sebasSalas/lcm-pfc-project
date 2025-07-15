@@ -38,8 +38,8 @@ def lcm_list(numbers):
 
 def solve_lcm_pfc(S, T, k):
     """
-    Resuelve el problema LCM Prime Factor Covering buscando un subconjunto
-    de tamaño EXACTO k.
+    Resuelve el problema LCM Prime Factor Covering buscando todos los subconjuntos
+    de tamaño EXACTO k que cumplan la condición.
 
     Args:
         S (list or set): El conjunto de enteros positivos.
@@ -48,10 +48,12 @@ def solve_lcm_pfc(S, T, k):
 
     Returns:
         tuple: Una tupla (bool, list) donde el bool es True si se encontró
-               una solución y la lista es el subconjunto S' que la satisface.
-               Retorna (False, None) si no se encuentra solución.
+               al menos una solución, y la lista contiene todos los subconjuntos S'
+               que la satisfacen. Retorna (False, None) si no se encuentra solución.
     """
-    print(f"Buscando un subconjunto S' ⊆ {S} de tamaño EXACTO {k} tal que {T} | LCM(S')...\n")
+    print(f"Buscando todos los subconjuntos S' ⊆ {S} de tamaño EXACTO {k} tal que {T} | LCM(S')...\n")
+    
+    solutions = [] # Lista para almacenar todas las soluciones encontradas
     
     # Buscan combinaciones del tamaño exacto especificado por k.
     for s_prime in combinations(S, k):
@@ -62,11 +64,15 @@ def solve_lcm_pfc(S, T, k):
         
         # Verificar si T divide al LCM
         if current_lcm % T == 0:
-            print(f"\n¡Solución encontrada!")
-            return True, list(s_prime)
+            print(f"    -> ¡Solución válida encontrada!")
+            solutions.append(list(s_prime))
 
-    print("\nNo se encontró ningún subconjunto que satisfaga la condición.")
-    return False, None
+    if solutions:
+        print(f"\nSe encontraron {len(solutions)} subconjunto(s) que satisfacen la condición.")
+        return True, solutions
+    else:
+        print("\nNo se encontró ningún subconjunto que satisfaga la condición.")
+        return False, None
 
 # --- Bloque de Demostración ---
 if __name__ == "__main__":
@@ -76,11 +82,13 @@ if __name__ == "__main__":
     k = 3 # <--- Aquí está la clave, ojo con esto.
 
     # Resolvemos el problema
-    found, subset = solve_lcm_pfc(S, T, k)
+    found, subsets = solve_lcm_pfc(S, T, k)
 
     # Imprimimos el resultado final
     if found:
-        print(f"Resultado: SÍ. El subconjunto {subset} funciona.")
-        print(f"Verificación: LCM({subset}) = {lcm_list(subset)}, y {lcm_list(subset)} % {T} = {lcm_list(subset) % T}")
+        print(f"\nResultado: SÍ. Se encontraron {len(subsets)} soluciones:")
+        for s in subsets:
+            print(f"  - El subconjunto {s} funciona.")
+            print(f"    Verificación: LCM({s}) = {lcm_list(s)}, y {lcm_list(s)} % {T} = {lcm_list(s) % T}")
     else:
         print(f"Resultado: NO. No se encontró solución.") 
