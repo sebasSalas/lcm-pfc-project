@@ -178,11 +178,26 @@ Dada una instancia de SET COVER (U, C, k), construimos una instancia de LCM-PFC 
 
 ### 4.1. Complejidad Temporal: O(n^k * k * log(L))
 
-**Generación de subconjuntos:** El código itera desde tamaños de 1 hasta k. Para cada tamaño `i`, se generan todas las combinaciones de `n` elementos tomados de `i` en `i` (notación: C(n, i)). La suma de estas combinaciones está acotada por O(n^k).
+**Desglose detallado de la complejidad:**
+- **O(n^k):** Corresponde al número de subconjuntos posibles de tamaño k que se pueden formar a partir de n elementos. Este término domina el crecimiento de la complejidad, ya que el número de combinaciones crece exponencialmente con k.
+- **k:** Para cada subconjunto, es necesario calcular el MCM de k números. Esto implica realizar k-1 operaciones de MCM (cada una usando el MCD), por lo que el costo de procesar cada subconjunto es proporcional a k.
+- **log(L):** Cada operación de MCM/MCD tiene un costo logarítmico respecto al tamaño de los números involucrados, donde L es el valor máximo que puede alcanzar el MCM.
 
-**Cálculo del LCM:** Para cada subconjunto de tamaño `i`, se calcula su LCM. Esto requiere `i-1` llamadas a la función `lcm`. La operación `gcd` dentro de `lcm` toma tiempo logarítmico respecto al valor de los operandos. Si `L` es el valor máximo que puede alcanzar el LCM, el tiempo para calcular el LCM de un subconjunto es aproximadamente O(i * log(L)).
+**Fórmula completa:**
+- El tiempo total es aproximadamente:  
+  **O(n^k * k * log(L))**
 
-**Complejidad Total:** Multiplicando el número de subconjuntos por el costo de procesar cada uno, obtenemos una complejidad de O(n^k * k * log(L)). Esta es una complejidad exponencial, consistente con la naturaleza NP-completa del problema.
+**¿Se puede simplificar?**
+- En muchos textos y contextos, cuando se busca dar una idea general del crecimiento y no se requiere precisión absoluta, se puede omitir el factor k y escribir la complejidad como **O(n^k * log(L))**. Esto es válido porque, para valores grandes de n y k, el término n^k domina completamente sobre k.
+- **Sin embargo**, para un análisis riguroso y comparativo, es preferible mantener la versión detallada **O(n^k * k * log(L))**, ya que muestra explícitamente el costo de calcular el MCM de cada subconjunto.
+
+> **Resumen:**
+> - Usa la versión detallada O(n^k * k * log(L)) para documentación técnica y análisis profundo.
+> - Puedes mencionar la versión simplificada O(n^k * log(L)) en contextos donde solo importa el crecimiento exponencial y no los factores internos.
+
+**Ejemplo práctico:**
+- Si n = 10 y k = 3, hay 120 subconjuntos posibles (C(10,3)), y para cada uno se hacen 2 operaciones de MCM, cada una con costo logarítmico.
+- Si n o k aumentan, el número de subconjuntos crece mucho más rápido que el factor k, pero este último sigue siendo relevante para el costo total.
 
 ### 4.2. Complejidad Espacial: O(k + log(L))
 
