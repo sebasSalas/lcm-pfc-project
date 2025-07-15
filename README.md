@@ -209,7 +209,7 @@ Dada una instancia de SET COVER (U, C, k), construimos una instancia de LCM-PFC 
 - **Descripción:** Gráfica de tiempos de ejecución reales para diferentes tamaños de entrada, comparando con la curva teórica.
 
 ---
-![Gráfica 1: Complejidad Temporal](images/captura.png)
+![Gráfica 1: XXXX](images/Captura.png)
 
 ## 5. Conclusiones
 
