@@ -221,7 +221,6 @@ Dada una instancia de SET COVER (U, C, k), construimos una instancia de LCM-PFC 
 ![Resultados Matlab](images/Captura.PNG)
 
 ---
-
 ## 5. Conclusiones
 
 ### 5.1. Resultados Principales
@@ -254,4 +253,7 @@ Dada una instancia de SET COVER (U, C, k), construimos una instancia de LCM-PFC 
 
 ## Autores
 
-[Incluir nombres de los autores de la presentación]
+Carlos Andrés Teleche
+Deiber Alexander Herrera Gamarra
+Johan Alejandro Chaves Alvarado
+Sebastian Salas Salazar
