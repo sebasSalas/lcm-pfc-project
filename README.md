@@ -269,6 +269,9 @@ Dada una instancia de SET COVER (U, C, k), construimos una instancia de LCM-PFC 
 ## Autores
 
 Carlos Andrés Teleche
+
 Deiber Alexander Herrera Gamarra
+
 Johan Alejandro Chaves Alvarado
+
 Sebastian Salas Salazar
