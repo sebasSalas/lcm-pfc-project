@@ -13,11 +13,11 @@ from itertools import combinations
         # combinaciones en una lista tendría una complejidad espacial de
         # O(C(n, k) * k), lo cual sería inviable.
 def gcd(a, b):
-    """Calcula el Máximo Común Divisor de a y b."""
+    # Calcula el Máximo Común Divisor de a y b.
     return math.gcd(a, b)
 
 def lcm(a, b):
-    """Calcula el Mínimo Común Múltiplo de a y b."""
+    # Calcula el Mínimo Común Múltiplo de a y b.
     if a == 0 or b == 0:
         return 0
     # La fórmula estándar es (a * b) / gcd(a, b).
@@ -27,7 +27,7 @@ def lcm(a, b):
     return abs(a // gcd(a, b)) * b
 
 def lcm_list(numbers):
-    """Calcula el LCM de una lista de números."""
+    # Calcula el LCM de una lista de números.
     if not numbers:
         return 1
     
