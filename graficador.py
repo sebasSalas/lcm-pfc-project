@@ -7,7 +7,7 @@ import os
 os.makedirs('images', exist_ok=True)
 
 # --- Gráfica 1: Complejidad temporal teórica O(n^k * k * log(L)) ---
-n_values = np.arange(5, 21, 1)
+n_values = np.arange(2, 21, 1)  # Cambiado de 5 a 2
 k = 5
 L = 10**6  # Valor arbitrario para L
 complexity = [n**k * k * np.log2(L) for n in n_values]
@@ -40,9 +40,9 @@ plt.tight_layout()
 plt.savefig('images/complejidad_espacial_ejes_invertidos.png')
 plt.show()
 
-# --- Gráfica 3: Tiempos reales de ejecución (simulados, reemplaza con tus datos reales) ---
-escenarios = ["Caso Base", "Medio 1", "Medio 2", "Medio 3", "Medio-Alto", "Alto 1", "Alto 2", "Muy Alto"]
-tiempos = [0.01, 0.05, 0.2, 0.5, 2.0, 10.0, 60.0, 180.0]  # segundos, ajusta según tus resultados
+# --- Gráfica 3: Tiempos reales de ejecución ---
+escenarios = ["Caso Base", "Medio 1", "Medio 2", "Medio 3", "Medio-Alto", "Alto 1", "Alto 2"]
+tiempos = [0.1523, 0.1486, 0.4897, 0.7411, 14.0720, 60.2780, 180.0]  # segundos, datos reales del benchmark
 
 plt.figure(figsize=(10,5))
 plt.plot(tiempos, escenarios, marker='o')

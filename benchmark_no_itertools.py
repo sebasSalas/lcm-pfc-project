@@ -52,8 +52,8 @@ def solve_lcm_pfc_no_itertools(S, T, k, verbose=True):
 # --- Bloque de Pruebas de Rendimiento ---
 
 TEST_SCENARIOS = [
-    {"name": "Caso Base", "n": 10, "k": 5, "max_val": 100},
-    {"name": "Medio 1", "n": 15, "k": 5, "max_val": 500},
+    {"name": "Caso Base", "n": 4, "k": 2, "max_val": 100},
+    {"name": "Medio 1", "n": 10, "k": 4, "max_val": 500},
     {"name": "Medio 2", "n": 15, "k": 7, "max_val": 500},
     {"name": "Medio 3", "n": 20, "k": 5, "max_val": 1000},
     {"name": "Medio-Alto", "n": 20, "k": 10, "max_val": 1000},
