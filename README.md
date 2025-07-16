@@ -191,10 +191,6 @@ Dada una instancia de SET COVER (U, C, k), construimos una instancia de LCM-PFC 
 - En muchos textos y contextos, cuando se busca dar una idea general del crecimiento y no se requiere precisión absoluta, se puede omitir el factor k y escribir la complejidad como **O(n^k * log(L))**. Esto es válido porque, para valores grandes de n y k, el término n^k domina completamente sobre k.
 - **Sin embargo**, para un análisis riguroso y comparativo, es preferible mantener la versión detallada **O(n^k * k * log(L))**, ya que muestra explícitamente el costo de calcular el LCM de cada subconjunto.
 
-> **Resumen:**
-> - Usa la versión detallada O(n^k * k * log(L)) para documentación técnica y análisis profundo.
-> - Puedes mencionar la versión simplificada O(n^k * log(L)) en contextos donde solo importa el crecimiento exponencial y no los factores internos.
-
 **Ejemplo práctico:**
 - Si n = 10 y k = 3, hay 120 subconjuntos posibles (C(10,3)), y para cada uno se hacen 2 operaciones de LCM, cada una con costo logarítmico.
 - Si n o k aumentan, el número de subconjuntos crece mucho más rápido que el factor k, pero este último sigue siendo relevante para el costo total.
@@ -222,12 +218,6 @@ Dada una instancia de SET COVER (U, C, k), construimos una instancia de LCM-PFC 
 - **Descripción:** Gráfica comparativa entre la implementación con generador O(k + log(L)) y sin generador O(C(n,k) * k).
 
 ![Gráfica 2: Complejidad Espacial](images/complejidad_espacial_ejes_invertidos.png)
-
-**[GRÁFICA 3]**
-- **Título:** Tiempo de Ejecución Real
-- **Descripción:** Gráfica de tiempos de ejecución reales para diferentes tamaños de entrada, comparando con la curva teórica.
-
-![Gráfica 3: Tiempo de Ejecución Real](images/tiempos_reales_ejes_invertidos.png)
 
 **[RESULTADOS MATLAB]**
 - **Título:** Resultados Matlab
